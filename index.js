@@ -14,10 +14,14 @@ const rootDir = path.join(process.cwd(), 'src', 'pages');
 const data = {};
 loadFolder(rootDir, (file) => {
   const filePath = file.replace(rootDir, '').slice(1).split(path.sep);
-  filePath.slice(0, -1).reduce((obj, i) => obj[i], data).files.push(filePath.pop());
+  const fileName = filePath.pop();
+  filePath.slice(0, -1).reduce((obj, i) => obj[i], data)[fileName] = {
+    name: fileName,
+    content: fs.readFileSync(file).toString()
+  }
 }, (dir) => {
   const a = dir.replace(rootDir, '').split(path.sep).slice(1);
-  const b = a.reduceRight((original, key) => ({ [key]: original, files: [] }), { files: [] });
+  const b = a.reduceRight((original, key) => ({ [key]: original }), {});
   data[a[0]] = b[a[0]];
 });
 
