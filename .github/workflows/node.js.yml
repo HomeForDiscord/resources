@@ -19,4 +19,4 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: node publisher/index.js
+    - run: node index.js
