@@ -10,7 +10,7 @@ const loadFolder = (folder, cb, dcb) => {
   return true;
 };
 
-const rootDir = path.join(process.cwd(), '..', 'src', 'pages');
+const rootDir = path.join(process.cwd(), 'src', 'pages');
 const data = {};
 loadFolder(rootDir, (file) => {
   const filePath = file.replace(rootDir, '').slice(1).split(path.sep);
